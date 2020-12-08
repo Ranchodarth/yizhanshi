@@ -54,7 +54,7 @@ export default {
                 },
                 {
                     icon: require('../../assets/img/tab_icn/user.png'),
-                    index: '404',
+                    index: 'tabs',
                     title: '用户管理'
                 },
                 {

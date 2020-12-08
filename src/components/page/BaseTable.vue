@@ -1,87 +1,168 @@
 <template>
-    <div>
-        <div class="crumbs">
-            <!-- <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-lx-cascades"></i> 基础表格
-        </el-breadcrumb-item>
-      </el-breadcrumb> -->
-        </div>
-        <div class="searchMouder">
-            <el-form ref="form" :model="form" label-width="80px">
-                <el-form-item label="角色名称">
-                    <el-col :span="11">
-                        <el-input v-model="form.name" placeholder="请输入"></el-input>
-                    </el-col>
-                    <el-col :span="11">
-                        <el-button type="primary" icon="el-icon-search" @click="handleSearch">查询</el-button>
-                    </el-col>
-                </el-form-item>
-            </el-form>
-        </div>
-        <div class="container">
-            <div class="handle-box">
-                <el-button type="primary" icon="el-icon-delete" class="handle-del mr10" @click="delAllSelection">批量删除</el-button>
-                <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-            </div>
-            <el-table
-                :data="tableData"
-                border
-                class="table"
-                ref="multipleTable"
-                header-cell-class-name="table-header"
-                @selection-change="handleSelectionChange"
-            >
-                <el-table-column type="selection" width="55" align="center"></el-table-column>
-                <el-table-column prop="id" label="序号" width="55" align="center"></el-table-column>
-                <el-table-column prop="name" label="角色名称" align="center"></el-table-column>
-                <el-table-column label="角色描述" align="center">
-                    <template slot-scope="scope">{{ scope.row.desc }}</template>
-                </el-table-column>
-                <el-table-column label="状态" align="center">
-                    <template slot-scope="scope">
-                        <el-tag :type="scope.row.state === '启用' ? 'success' : scope.row.state === '禁用' ? 'danger' : ''">{{
+  <div>
+    <div class="crumbs">
+    </div>
+    <div class="searchMouder">
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="80px"
+      >
+        <el-form-item label="角色名称">
+          <el-col :span="4">
+            <el-input
+              v-model="form.name"
+              placeholder="请输入"
+            ></el-input>
+          </el-col>
+          <el-col
+            :span="4"
+            class="fr"
+          >
+            <el-button
+              type="primary"
+              icon="el-icon-search"
+              @click="handleSearch"
+            >查询</el-button>
+            <el-button
+              type="primary"
+              icon="el-icon-refresh"
+              class="refresh"
+            >重置</el-button>
+          </el-col>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div class="container">
+      <div class="handle-box">
+        <el-button
+          type="primary"
+          class="handle-del mr30 btn_hand"
+          @click="delAllSelection"
+          ><img
+            src="../../assets/img/function_icon/add.png"
+            alt=""
+            style="vertical-align: middle;margin-right: 5px;"
+          ><span style="vertical-align: middle;">新增</span></el-button>
+        <el-button
+          type="primary"
+          @click="handleSearch"
+          class="btn_hand"
+        ><img
+            src="../../assets/img/function_icon/delete.png"
+            alt=""
+            style="vertical-align: middle;margin-right: 5px;"
+          ><span style="vertical-align: middle;">删除</span></el-button>
+      </div>
+      <el-table
+        :data="tableData"
+        border
+        class="table"
+        ref="multipleTable"
+        header-cell-class-name="table-header"
+        @selection-change="handleSelectionChange"
+      >
+        <el-table-column
+          type="selection"
+          width="55"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="id"
+          label="序号"
+          width="55"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="name"
+          label="角色名称"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          label="角色描述"
+          align="center"
+        >
+          <template slot-scope="scope">{{ scope.row.desc }}</template>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.state === '启用' ? 'success' : scope.row.state === '禁用' ? 'danger' : ''">{{
                             scope.row.state
                         }}</el-tag>
-                    </template>
-                </el-table-column>
-                <el-table-column prop="creater" label="创建人" align="center"></el-table-column>
-                <el-table-column prop="date" label="注册时间" align="center"></el-table-column>
-                <el-table-column label="操作" width="180" align="center">
-                    <template slot-scope="scope">
-                        <el-button type="text" @click="handleDelete(scope.$index, scope.row)">查看</el-button>
-                        <el-button type="text" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="pagination">
-                <el-pagination
-                    background
-                    layout="total, prev, pager, next"
-                    :current-page="query.pageIndex"
-                    :page-size="query.pageSize"
-                    :total="pageTotal"
-                    @current-change="handlePageChange"
-                ></el-pagination>
-            </div>
-        </div>
-
-        <!-- 编辑弹出框 -->
-        <el-dialog title="编辑" :visible.sync="editVisible" width="30%">
-            <el-form ref="form" :model="form" label-width="70px">
-                <el-form-item label="用户名">
-                    <el-input v-model="form.name"></el-input>
-                </el-form-item>
-                <el-form-item label="地址">
-                    <el-input v-model="form.address"></el-input>
-                </el-form-item>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="editVisible = false">取 消</el-button>
-                <el-button type="primary" @click="saveEdit">确 定</el-button>
-            </span>
-        </el-dialog>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="creater"
+          label="创建人"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="date"
+          label="注册时间"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          label="操作"
+          width="180"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="handleDelete(scope.$index, scope.row)"
+            >查看</el-button>
+            <el-button
+              type="text"
+              @click="handleEdit(scope.$index, scope.row)"
+            >编辑</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination">
+        <el-pagination
+          background
+          layout="total, prev, pager, next"
+          :current-page="query.pageIndex"
+          :page-size="query.pageSize"
+          :total="pageTotal"
+          @current-change="handlePageChange"
+        ></el-pagination>
+      </div>
     </div>
+
+    <!-- 编辑弹出框 -->
+    <el-dialog
+      title="编辑"
+      :visible.sync="editVisible"
+      width="30%"
+    >
+      <el-form
+        ref="form"
+        :model="form"
+        label-width="70px"
+      >
+        <el-form-item label="用户名">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="地址">
+          <el-input v-model="form.address"></el-input>
+        </el-form-item>
+      </el-form>
+      <span
+        slot="footer"
+        class="dialog-footer"
+      >
+        <el-button @click="editVisible = false">取 消</el-button>
+        <el-button
+          type="primary"
+          @click="saveEdit"
+        >确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -114,7 +195,7 @@ export default {
         getData() {
             fetchData(this.query).then((res) => {
                 console.log(res);
-                this.tableData = res.list;
+                this.tableData = res.roleList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },
@@ -193,6 +274,9 @@ export default {
 .mr10 {
     margin-right: 10px;
 }
+.mr30 {
+    margin-right: 30px;
+}
 .table-td-thumb {
     display: block;
     margin: auto;
@@ -206,7 +290,21 @@ export default {
     margin-bottom: 10px;
 }
 
-/deep/ .el-form-item--small.el-form-item{
-  margin: 0;
+/deep/ .el-form-item--small.el-form-item {
+    margin: 0;
+}
+
+.fr {
+    float: right;
+}
+.refresh {
+    background: #d3e2fb;
+    border-color: #d3e2fb;
+    color: #000;
+}
+.btn_hand{
+    background: #e8eefc;
+    color: #7d7e81;
+    padding: 6px 12px;
 }
 </style>
