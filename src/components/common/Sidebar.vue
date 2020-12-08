@@ -59,7 +59,7 @@ export default {
                 },
                 {
                     icon: require('../../assets/img/tab_icn/entry.png'),
-                    index: '3',
+                    index: 'charts',
                     title: '统一入口'
                 },
                 {

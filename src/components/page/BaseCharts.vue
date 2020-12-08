@@ -1,149 +1,151 @@
 <template>
-    <div>
-        <div class="crumbs">
-            <el-breadcrumb separator="/">
-                <el-breadcrumb-item>
-                    <i class="el-icon-pie-chart"></i> schart图表
-                </el-breadcrumb-item>
-            </el-breadcrumb>
-        </div>
-        <div class="container">
-            <div class="plugins-tips">
-                vue-schart：vue.js封装sChart.js的图表组件。
-                访问地址：
-                <a
-                    href="https://github.com/lin-xin/vue-schart"
-                    target="_blank"
-                >vue-schart</a>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">柱状图</div>
-                <schart class="schart" canvasId="bar" :options="options1"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">折线图</div>
-                <schart class="schart" canvasId="line" :options="options2"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">饼状图</div>
-                <schart class="schart" canvasId="pie" :options="options3"></schart>
-            </div>
-            <div class="schart-box">
-                <div class="content-title">环形图</div>
-                <schart class="schart" canvasId="ring" :options="options4"></schart>
-            </div>
-        </div>
+  <div>
+    <div class="crumbs">
     </div>
+
+  </div>
 </template>
 
 <script>
-import Schart from 'vue-schart';
+import { fetchData } from '../../api/index';
 export default {
-    name: 'basecharts',
-    components: {
-        Schart
-    },
+    name: 'basetable',
     data() {
         return {
-            options1: {
-                type: 'bar',
-                title: {
-                    text: '最近一周各品类销售图'
-                },
-                bgColor: '#fbfbfb',
-                labels: ['周一', '周二', '周三', '周四', '周五'],
-                datasets: [
-                    {
-                        label: '家电',
-                        fillColor: 'rgba(241, 49, 74, 0.5)',
-                        data: [234, 278, 270, 190, 230]
-                    },
-                    {
-                        label: '百货',
-                        data: [164, 178, 190, 135, 160]
-                    },
-                    {
-                        label: '食品',
-                        data: [144, 198, 150, 235, 120]
-                    }
-                ]
+            query: {
+                address: '',
+                name: '',
+                pageIndex: 1,
+                pageSize: 10
             },
-            options2: {
-                type: 'line',
-                title: {
-                    text: '最近几个月各品类销售趋势图'
-                },
-                bgColor: '#fbfbfb',
-                labels: ['6月', '7月', '8月', '9月', '10月'],
-                datasets: [
-                    {
-                        label: '家电',
-                        data: [234, 278, 270, 190, 230]
-                    },
-                    {
-                        label: '百货',
-                        data: [164, 178, 150, 135, 160]
-                    },
-                    {
-                        label: '食品',
-                        data: [114, 138, 200, 235, 190]
-                    }
-                ]
-            },
-            options3: {
-                type: 'pie',
-                title: {
-                    text: '服装品类销售饼状图'
-                },
-                legend: {
-                    position: 'left'
-                },
-                bgColor: '#fbfbfb',
-                labels: ['T恤', '牛仔裤', '连衣裙', '毛衣', '七分裤', '短裙', '羽绒服'],
-                datasets: [
-                    {
-                        data: [334, 278, 190, 235, 260, 200, 141]
-                    }
-                ]
-            },
-            options4: {
-                type: 'ring',
-                title: {
-                    text: '环形三等分'
-                },
-                showValue: false,
-                legend: {
-                    position: 'bottom',
-                    bottom: 40
-                },
-                bgColor: '#fbfbfb',
-                labels: ['vue', 'react', 'angular'],
-                datasets: [
-                    {
-                        data: [500, 500, 500]
-                    }
-                ]
-            }
+            tableData: [],
+            multipleSelection: [],
+            delList: [],
+            editVisible: false,
+            pageTotal: 0,
+            form: {},
+            idx: -1,
+            id: -1
         };
+    },
+    created() {
+        this.getData();
+    },
+    methods: {
+        // 获取 easy-mock 的模拟数据
+        getData() {
+            fetchData(this.query).then((res) => {
+                console.log(res);
+                this.tableData = res.roleList;
+                this.pageTotal = res.pageTotal || 50;
+            });
+        },
+        // 触发搜索按钮
+        handleSearch() {
+            this.$set(this.query, 'pageIndex', 1);
+            this.getData();
+        },
+        // 删除操作
+        handleDelete(index, row) {
+            // 二次确认删除
+            this.$confirm('确定要删除吗？', '提示', {
+                type: 'warning'
+            })
+                .then(() => {
+                    this.$message.success('删除成功');
+                    this.tableData.splice(index, 1);
+                })
+                .catch(() => {});
+        },
+        // 多选操作
+        handleSelectionChange(val) {
+            this.multipleSelection = val;
+        },
+        delAllSelection() {
+            const length = this.multipleSelection.length;
+            let str = '';
+            this.delList = this.delList.concat(this.multipleSelection);
+            for (let i = 0; i < length; i++) {
+                str += this.multipleSelection[i].name + ' ';
+            }
+            this.$message.error(`删除了${str}`);
+            this.multipleSelection = [];
+        },
+        // 编辑操作
+        handleEdit(index, row) {
+            this.idx = index;
+            this.form = row;
+            this.editVisible = true;
+        },
+        // 保存编辑
+        saveEdit() {
+            this.editVisible = false;
+            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
+            this.$set(this.tableData, this.idx, this.form);
+        },
+        // 分页导航
+        handlePageChange(val) {
+            this.$set(this.query, 'pageIndex', val);
+            this.getData();
+        }
     }
 };
 </script>
 
 <style scoped>
-.schart-box {
+.handle-box {
+    margin-bottom: 20px;
+}
+
+.handle-select {
+    width: 120px;
+}
+
+.handle-input {
+    width: 300px;
     display: inline-block;
-    margin: 20px;
 }
-.schart {
-    width: 600px;
-    height: 400px;
+.table {
+    width: 100%;
+    font-size: 14px;
 }
-.content-title {
-    clear: both;
-    font-weight: 400;
-    line-height: 50px;
-    margin: 10px 0;
-    font-size: 22px;
-    color: #1f2f3d;
+.red {
+    color: #ff0000;
+}
+.mr10 {
+    margin-right: 10px;
+}
+.mr30 {
+    margin-right: 30px;
+}
+.table-td-thumb {
+    display: block;
+    margin: auto;
+    width: 40px;
+    height: 40px;
+}
+
+.searchMouder {
+    background: #fff;
+    padding: 30px;
+    margin-bottom: 10px;
+}
+
+/deep/ .el-form-item--small.el-form-item {
+    margin: 0;
+}
+
+.fr {
+    float: right;
+}
+.refresh {
+    background: #d3e2fb;
+    border-color: #d3e2fb;
+    color: #000;
+}
+.btn_hand{
+    background: #e8eefc;
+    color: #7d7e81;
+    padding: 6px 12px;
 }
 </style>
