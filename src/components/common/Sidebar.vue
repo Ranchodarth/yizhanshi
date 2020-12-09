@@ -15,7 +15,8 @@
                 <template v-if="item.subs" @click.native="keyi">
                     <el-submenu :index="item.index" :key="item.index">
                         <template slot="title">
-                            <img style="width: 16px; height: 16px; margin-right: 10px" :src="item.icon" alt="" />
+                            <!-- <img style="width: 16px; height: 16px; margin-right: 10px" :src="item.icon" alt="" /> -->
+                            <i :class="item.icon"></i>
                             <span slot="title">{{ item.title }}</span>
                         </template>
                         <template v-for="subItem in item.subs">
@@ -31,7 +32,8 @@
                 </template>
                 <template v-else>
                     <el-menu-item :index="item.index" :key="item.index">
-                        <img style="width: 16px; height: 16px; margin-right: 10px" :src="item.icon" alt="" />
+                        <!-- <img style="width: 16px; height: 16px; margin-right: 10px" :src="item.icon" alt="" /> -->
+                        <i :class="item.icon"></i>
                         <span slot="title">{{ item.title }}</span>
                     </el-menu-item>
                 </template>
@@ -48,37 +50,37 @@ export default {
             collapse: false,
             items: [
                 {
-                    icon: require('../../assets/img/tab_icn/role.png'),
+                    icon: "el-icon-lrolejiaoseguanli",
                     index: 'table',
                     title: '角色管理'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/user.png'),
+                    icon: "el-icon-lroleqiye",
                     index: 'tabs',
-                    title: '用户管理'
+                    title: '企业单位信息维护'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/entry.png'),
+                    icon: "el-icon-lrolerukou",
                     index: 'charts',
                     title: '统一入口'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/query.png'),
+                    icon: "el-icon-lrolechaxun",
                     index: '4041',
                     title: '申报查询及处理'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/talent.png'),
+                    icon: "el-icon-lrolecard",
                     index: '4042',
                     title: '人才库'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/bank.png'),
+                    icon: "el-icon-lrolebank",
                     index: '6',
                     title: '银行管理'
                 },
                 {
-                    icon: require('../../assets/img/tab_icn/card.png'),
+                    icon: "el-icon-lrolezhengjian",
                     index: '4043',
                     title: '银行卡汇总'
                 },
@@ -128,8 +130,13 @@ export default {
 .sidebar > ul {
     height: 100%;
 }
-
+/deep/.el-menu-item{
+    padding-left: 40px !important;
+    height: 52px;
+    line-height: 52px;
+    background: #fff!important;
+}
 /deep/.el-menu-item.is-active {
-   background-color: #1d6cec !important;
+   background: url("../../assets/img/active.png") no-repeat !important;
 }
 </style>
