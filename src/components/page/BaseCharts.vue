@@ -36,16 +36,16 @@
             <!-- <p style="font-size:14px;">{{item.desc}}</p> -->
           </div>
           <div
-            class="main_list"
-            style="height:0;padding:0;width:290px"
+            class="main_list mr10"
+            style="height:0;width:290px;background:#f2f6fb;"
           ></div>
           <div
-            class="main_list"
-            style="height:0;padding:0;width:290px"
+            class="main_list mr10"
+            style="height:0;width:290px;background:#f2f6fb;"
           ></div>
           <div
-            class="main_list"
-            style="height:0;padding:0;width:290px"
+            class="main_list mr10"
+            style="height:0;width:290px;background:#f2f6fb;"
           ></div>
         </div>
       </div>
@@ -163,6 +163,7 @@ export default {
     display: flex;
     align-items: center;
     width: 240px;
+    flex: 0 0 20%;
 }
 .main_item span {
     color: #323b6e;
@@ -177,6 +178,7 @@ export default {
     align-items: center;
     width: 240px;
     margin-bottom: 20px;
+    flex: 0 0 20%;
 }
 .list_top {
     display: flex;
@@ -187,7 +189,7 @@ export default {
     color: 838ea5;
     font-weight: 600;
     margin-right: 20px;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 .list_top img {
 }
