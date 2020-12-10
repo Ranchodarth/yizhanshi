@@ -1,8 +1,55 @@
 <template>
   <div>
     <div class="crumbs">
+      <div class="inter_row">
+        <p class="moudleTitle">快速入口</p>
+        <div class="row_main">
+          <div
+            class="main_item mr10"
+            v-for="(item,index) in interList"
+            :key="index"
+          >
+            <img
+              class="mr10"
+              :src="item.img"
+              alt=""
+            >
+            <span>{{item.txt}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="inter_row">
+        <p class="moudleTitle">补贴平台</p>
+        <div class="row_main">
+          <div
+            class="main_list mr10"
+            v-for="(item,index) in subsidyList"
+            :key="index"
+          >
+            <div class="list_top">
+              <span>{{item.title}}</span>
+              <img
+                :src="item.img"
+                alt=""
+              >
+            </div>
+            <!-- <p style="font-size:14px;">{{item.desc}}</p> -->
+          </div>
+          <div
+            class="main_list"
+            style="height:0;padding:0;width:290px"
+          ></div>
+          <div
+            class="main_list"
+            style="height:0;padding:0;width:290px"
+          ></div>
+          <div
+            class="main_list"
+            style="height:0;padding:0;width:290px"
+          ></div>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -12,83 +59,66 @@ export default {
     name: 'basetable',
     data() {
         return {
-            query: {
-                address: '',
-                name: '',
-                pageIndex: 1,
-                pageSize: 10
-            },
-            tableData: [],
-            multipleSelection: [],
-            delList: [],
-            editVisible: false,
-            pageTotal: 0,
-            form: {},
-            idx: -1,
-            id: -1
+            interList: [
+                {
+                    img: require('../../assets/img/interSearch.png'),
+                    txt: '申报查询'
+                },
+                {
+                    img: require('../../assets/img/interBank.png'),
+                    txt: '银行管理'
+                },
+                {
+                    img: require('../../assets/img/interCard.png'),
+                    txt: '银行卡汇总'
+                },
+                {
+                    img: require('../../assets/img/interSubsidy.png'),
+                    txt: '补贴发放'
+                }
+            ],
+            subsidyList: [
+                {
+                    title: '人才项目需求库及网上申报',
+                    img: require('../../assets/img/interField.png'),
+                    desc:
+                        '人才项目需求库及网上申报是一种很好的网上申报，具体是怎么好的申报这个就是很好，到底怎么好我实在编不下去了。为了凑够三行只能再打几个字了……'
+                },
+                {
+                    title: '大学生见实习补贴',
+                    img: require('../../assets/img/interSx.png'),
+                    desc: ''
+                },
+                {
+                    title: '姑苏重点产业紧缺人才计划',
+                    img: require('../../assets/img/interGs.png'),
+                    desc: ''
+                },
+                {
+                    title: '乐居工程',
+                    img: require('../../assets/img/interLj.png'),
+                    desc: ''
+                },
+                {
+                    title: '优秀人才贡献奖',
+                    img: require('../../assets/img/interYx.png'),
+                    desc: ''
+                },
+                {
+                    title: '高等院校、科研院所引财补贴',
+                    img: require('../../assets/img/interYj.png'),
+                    desc: ''
+                },
+                {
+                    title: '企业通过人才中介机构招财引智的引财补贴',
+                    img: require('../../assets/img/interQy.png'),
+                    desc: ''
+                }
+            ]
         };
     },
-    created() {
-        this.getData();
-    },
-    methods: {
-        // 获取 easy-mock 的模拟数据
-        getData() {
-            fetchData(this.query).then((res) => {
-                console.log(res);
-                this.tableData = res.roleList;
-                this.pageTotal = res.pageTotal || 50;
-            });
-        },
-        // 触发搜索按钮
-        handleSearch() {
-            this.$set(this.query, 'pageIndex', 1);
-            this.getData();
-        },
-        // 删除操作
-        handleDelete(index, row) {
-            // 二次确认删除
-            this.$confirm('确定要删除吗？', '提示', {
-                type: 'warning'
-            })
-                .then(() => {
-                    this.$message.success('删除成功');
-                    this.tableData.splice(index, 1);
-                })
-                .catch(() => {});
-        },
-        // 多选操作
-        handleSelectionChange(val) {
-            this.multipleSelection = val;
-        },
-        delAllSelection() {
-            const length = this.multipleSelection.length;
-            let str = '';
-            this.delList = this.delList.concat(this.multipleSelection);
-            for (let i = 0; i < length; i++) {
-                str += this.multipleSelection[i].name + ' ';
-            }
-            this.$message.error(`删除了${str}`);
-            this.multipleSelection = [];
-        },
-        // 编辑操作
-        handleEdit(index, row) {
-            this.idx = index;
-            this.form = row;
-            this.editVisible = true;
-        },
-        // 保存编辑
-        saveEdit() {
-            this.editVisible = false;
-            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-            this.$set(this.tableData, this.idx, this.form);
-        },
-        // 分页导航
-        handlePageChange(val) {
-            this.$set(this.query, 'pageIndex', val);
-            this.getData();
-        }
-    }
+    created() {},
+    methods: {}
 };
 </script>
 
@@ -118,34 +148,65 @@ export default {
 .mr30 {
     margin-right: 30px;
 }
-.table-td-thumb {
-    display: block;
-    margin: auto;
-    width: 40px;
-    height: 40px;
+.inter_row {
 }
-
-.searchMouder {
+.row_main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.main_item {
+    padding: 20px;
     background: #fff;
-    padding: 30px;
-    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    width: 240px;
 }
-
-/deep/ .el-form-item--small.el-form-item {
-    margin: 0;
+.main_item span {
+    color: #323b6e;
+    font-weight: 700;
 }
-
-.fr {
-    float: right;
+.main_list {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 240px;
+    margin-bottom: 20px;
 }
-.refresh {
-    background: #d3e2fb;
-    border-color: #d3e2fb;
-    color: #000;
+.list_top {
+    display: flex;
+    align-items: center;
 }
-.btn_hand{
-    background: #e8eefc;
-    color: #7d7e81;
-    padding: 6px 12px;
+.list_top span {
+    text-align: center;
+    color: 838ea5;
+    font-weight: 600;
+    margin-right: 20px;
+    font-size: 14px;
+}
+.list_top img {
+}
+.moudleTitle {
+    /* border-bottom: 5px solid #d2e2f8; */
+    font-weight: 700;
+    font-style: 18px;
+    margin: 30px 0 30px 20px;
+    position: relative;
+    display: inline-block;
+    padding: 0 6px;
+}
+.moudleTitle::after {
+    content: '';
+    background: RGBA(210, 226, 248, 0.8);
+    position: absolute;
+    left: 0;
+    height: 6px;
+    bottom: 0;
+    width: 100%;
 }
 </style>
