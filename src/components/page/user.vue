@@ -10,7 +10,7 @@
         label-width="80px"
       >
         <el-form-item
-          label="名称"
+          label="角色名称"
           class="mr10"
         >
           <el-input
@@ -67,24 +67,18 @@
             alt=""
             style="vertical-align: middle;margin-right: 5px;"
           ><span style="vertical-align: middle;">新增</span></el-button>
-        <el-button
-          type="primary"
-          @click="handleSearch"
-          class="btn_hand mr30"
-        ><img
-            src="../../assets/img/function_icon/delete.png"
-            alt=""
-            style="vertical-align: middle;margin-right: 5px;"
-          ><span style="vertical-align: middle;">删除</span></el-button>
-        <el-button
-          type="primary"
-          class="handle-del btn_hand"
-          @click="delAllSelection"
-        ><img
-            src="../../assets/img/function_icon/daochu.png"
-            alt=""
-            style="vertical-align: middle;margin-right: 5px;"
-          ><span style="vertical-align: middle;">导出</span></el-button>
+          <el-switch
+            class="btn_hand mr30"
+            v-model="switchFlag"
+            active-text="启用"
+            inactive-text="">
+        </el-switch>
+       <el-switch
+            class="btn_hand mr30"
+            v-model="switchCloseFlag"
+            active-text="冻结"
+            inactive-text="">
+        </el-switch>
       </div>
       <el-table
         :data="tableData"
@@ -106,33 +100,43 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="name"
-          label="企业名称"
+          prop="titleName"
+          label="角色名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="num"
-          label="企业社保编号"
+          prop="loginName"
+          label="登录名"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="field"
-          label="所属产业领域"
+          prop="realName"
+          label="姓名"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="address"
-          label="地址"
+          prop="phoneNum"
+          label="联系电话"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="street"
-          label="所属乡镇/街道"
+          label="状态"
+          align="center"
+        >
+          <template slot-scope="scope">
+            <el-tag :type="scope.row.state === '启用' ? 'success' : scope.row.state === '禁用' ? 'danger' : ''">{{
+                            scope.row.state
+                        }}</el-tag>
+          </template>
+        </el-table-column>
+       <el-table-column
+          prop="creater"
+          label="创建人"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="type"
-          label="所属类型"
+          prop="date"
+          label="创建时间"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -166,7 +170,7 @@
 
     <!-- 查看弹出框 -->
     <el-dialog
-      title="查看"
+      title="查看用户"
       :visible.sync="seeanle"
       width="30%"
     >
@@ -176,16 +180,16 @@
         label-width="130px"
       >
         <div class="mb20 seeItem">
-          <span>企业社保编号</span>
-          <span>{{form.num}}</span>
+          <span>用户名称</span>
+          <span>{{form.titleName}}</span>
         </div>
         <div class="mb20 seeItem">
-          <span>企业名称</span>
-          <span>{{form.name}}</span>
+          <span>姓名</span>
+          <span>{{form.realName}}</span>
         </div>
         <div class="mb20 seeItem">
-          <span>地址</span>
-          <span>{{form.address}}</span>
+          <span>联系电话</span>
+          <span>{{form.phoneNum}}</span>
         </div>
         <div class="mb20 seeItem">
           <span>所属乡镇/街道</span>
@@ -237,19 +241,38 @@
         label-width="130px"
       >
         <el-form-item
-          label="企业社保编号"
+          label="用户名称"
           class="mb20"
         >
-          <el-input v-model="form.num"></el-input>
+          <el-input v-model="form.titleName"></el-input>
         </el-form-item>
+        
         <el-form-item
-          label="企业名称"
+          label="姓名"
           class="mb20"
         >
-          <el-input v-model="form.name"></el-input>
+          <el-input v-model="form.realName"></el-input>
         </el-form-item>
         <el-form-item
-          label="所属产业领域"
+          label="联系电话"
+          class="mb20"
+        >
+          <el-input v-model="form.phoneNum"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="密码"
+          class="mb20"
+        >
+          <el-input v-model="psw"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="确认密码"
+          class="mb20"
+        >
+          <el-input v-model="pswAgain"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="角色类型"
           class="mb20"
         >
           <el-select
@@ -257,65 +280,10 @@
             placeholder="请选择"
           >
             <el-option
-              label="电子制造业"
-              value="电子制造业"
+              label="系统管理员"
+              value="系统管理员"
             ></el-option>
           </el-select>
-        </el-form-item>
-        <el-form-item
-          label="地址"
-          class="mb20"
-        >
-          <el-input v-model="form.address"></el-input>
-        </el-form-item>
-        <el-form-item
-          label="所属乡镇/街道"
-          class="mb20"
-        >
-          <el-input v-model="form.street"></el-input>
-        </el-form-item>
-        <el-form-item
-          label="企业固定电话"
-          class="mb20"
-        >
-          <el-input v-model="form.tel"></el-input>
-        </el-form-item>
-        <el-form-item
-          label="联系人"
-          class="mb20"
-        >
-          <el-input v-model="form.liaise"></el-input>
-        </el-form-item>
-        <el-form-item
-          label="联系方式"
-          class="mb20"
-        >
-          <el-input v-model="form.phone"></el-input>
-        </el-form-item>
-
-        <el-form-item
-          label="所属类型"
-          class="mb20"
-        >
-          <el-select
-            v-model="form.type"
-            placeholder="请选择"
-          >
-            <el-option
-              label="规模以上企业、高新技术企业"
-              value="规模以上企业、高新技术企业"
-            ></el-option>
-            <el-option
-              label="规模以上企业"
-              value="规模以上企业"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="备注">
-          <el-input
-            type="textarea"
-            v-model="form.remarks"
-          ></el-input>
         </el-form-item>
       </el-form>
       <span
@@ -357,7 +325,11 @@ export default {
             formInline: {
                 user: '',
                 region: ''
-            }
+            },
+            switchFlag:true,
+            switchCloseFlag:false,
+            psw:"",
+            pswAgain:"",
         };
     },
     created() {
@@ -368,7 +340,7 @@ export default {
         getData() {
             fetchData(this.query).then((res) => {
                 console.log(res);
-                this.tableData = res.businessList;
+                this.tableData = res.userList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },
@@ -434,6 +406,8 @@ export default {
 <style scoped>
 .handle-box {
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
 }
 
 .handle-select {
@@ -486,6 +460,24 @@ export default {
 /deep/ .el-select {
     display: block;
 }
+/deep/.el-switch__core{
+    width: 30px!important;
+    height: 16px;
+}
+/deep/.el-switch__core:after{
+    width: 12px;
+    height: 12px;
+}
+/deep/.el-switch.is-checked .el-switch__core::after{
+    margin-left: -13px;
+}
+/deep/.el-switch__label--right{
+    color: #7d7e81;
+}
+/deep/.el-switch{
+    height: 17px;
+    border-radius: 3px;
+}
 
 .fr {
     float: right;
@@ -499,6 +491,7 @@ export default {
     background: #e8eefc;
     color: #7d7e81;
     padding: 6px 12px;
+    border: none;
 }
 .seeItem {
     display: flex;

@@ -55,6 +55,11 @@ export default {
                     title: '角色管理'
                 },
                 {
+                    icon: "el-icon-lroleyonghuguanli",
+                    index: 'user',
+                    title: '用户管理'
+                },
+                {
                     icon: "el-icon-lroleqiye",
                     index: 'tabs',
                     title: '企业单位信息维护'
@@ -70,7 +75,7 @@ export default {
                     title: '申报查询及处理'
                 },
                 {
-                    icon: "el-icon-lrolecard",
+                    icon: "el-icon-lrolezhengjian",
                     index: '4042',
                     title: '人才库'
                 },
@@ -80,7 +85,7 @@ export default {
                     title: '银行管理'
                 },
                 {
-                    icon: "el-icon-lrolezhengjian",
+                    icon: "el-icon-lrolecard",
                     index: '4043',
                     title: '银行卡汇总'
                 },

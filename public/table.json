@@ -33,7 +33,7 @@
             "date": "2020-01-01"
         }
     ],
-    "userList": [
+    "businessList": [
         {
             "id": 1,
             "name": "太仓同维电子有限公司",
@@ -85,6 +85,48 @@
             "liaise":"张三",
             "phone":"13812348273",
             "remarks":"备注"
+        }
+    ],
+    "userList":[
+        {
+            "id": 1,
+            "titleName": "系统管理员",
+            "loginName": "admin",
+            "realName": "李玲",
+            "phoneNum": "15093505387",
+            "state": "启用",
+            "creater": "系统初始化",
+            "date":"2020-01-01"
+        },
+        {
+            "id": 1,
+            "titleName": "系统管理员",
+            "loginName": "admin",
+            "realName": "李玲",
+            "phoneNum": "15093505387",
+            "state": "启用",
+            "creater": "系统初始化",
+            "date":"2020-01-01"
+        },
+        {
+            "id": 1,
+            "titleName": "系统管理员",
+            "loginName": "admin",
+            "realName": "李玲",
+            "phoneNum": "15093505387",
+            "state": "启用",
+            "creater": "系统初始化",
+            "date":"2020-01-01"
+        },
+        {
+            "id": 1,
+            "titleName": "系统管理员",
+            "loginName": "admin",
+            "realName": "李玲",
+            "phoneNum": "15093505387",
+            "state": "启用",
+            "creater": "系统初始化",
+            "date":"2020-01-01"
         }
     ],
     "pageTotal": 4

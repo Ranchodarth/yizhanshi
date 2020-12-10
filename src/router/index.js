@@ -20,9 +20,14 @@ export default new Router({
                     meta: { title: '角色管理' }
                 },
                 {
+                    path: '/user',
+                    component: () => import(/* webpackChunkName: "tabs" */ '../components/page/user.vue'),
+                    meta: { title: '用户管理' }
+                },
+                {
                     path: '/tabs',
                     component: () => import(/* webpackChunkName: "tabs" */ '../components/page/Tabs.vue'),
-                    meta: { title: '用户管理' }
+                    meta: { title: '企业单位信息维护' }
                 },
                 {
                     // vue-schart组件
