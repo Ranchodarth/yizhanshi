@@ -10,7 +10,7 @@
         label-width="80px"
       >
         <el-form-item
-          label="角色名称"
+          label="人员姓名"
           class="mr10"
         >
           <el-input
@@ -19,7 +19,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item
-          label="登录名"
+          label="身份证号"
           class="mr10"
         >
           <el-input
@@ -27,7 +27,53 @@
             placeholder="请输入"
           ></el-input>
         </el-form-item>
-        <el-form-item label="角色类型">
+        <el-form-item
+          label="企业名称"
+          class="mr10"
+        >
+          <el-input
+            v-model="form.name"
+            placeholder="请输入"
+          ></el-input>
+        </el-form-item>
+        <el-form-item
+          label="企业社保账号"
+          class="mr10"
+        >
+          <el-input
+            v-model="form.name"
+            placeholder="请输入"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <el-form
+        ref="form"
+        :inline="true"
+        :model="form"
+        label-width="80px"
+      >
+        <el-form-item
+          label="补贴类型"
+          class="mr10"
+        >
+          <el-select
+            v-model="formInline.region"
+            placeholder="请选择"
+          >
+            <el-option
+              label="区域一"
+              value="shanghai"
+            ></el-option>
+            <el-option
+              label="区域二"
+              value="beijing"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          label="申请状态"
+          class="mr10"
+        >
           <el-select
             v-model="formInline.region"
             placeholder="请选择"
@@ -63,24 +109,10 @@
           class="handle-del mr30 btn_hand"
           @click="delAllSelection"
         ><img
-            src="../../assets/img/function_icon/add.png"
+            src="../../assets/img/function_icon/daochu.png"
             alt=""
             style="vertical-align: middle;margin-right: 5px;"
-          ><span style="vertical-align: middle;">新增</span></el-button>
-        <el-switch
-          class="btn_hand mr30"
-          v-model="switchFlag"
-          active-text="启用"
-          inactive-text=""
-        >
-        </el-switch>
-        <el-switch
-          class="btn_hand mr30"
-          v-model="switchCloseFlag"
-          active-text="冻结"
-          inactive-text=""
-        >
-        </el-switch>
+          ><span style="vertical-align: middle;">导出</span></el-button>
       </div>
       <el-table
         :data="tableData"
@@ -102,45 +134,35 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="titleName"
-          label="角色名称"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="loginName"
-          label="登录名"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="realName"
+          prop="name"
           label="姓名"
           align="center"
         ></el-table-column>
-        <el-table-column
+         <el-table-column
           prop="phoneNum"
-          label="联系电话"
+          label="联系方式"
           align="center"
         ></el-table-column>
         <el-table-column
-          label="状态"
-          align="center"
-        >
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.state === '启用' ? 'success' : scope.row.state === '禁用' ? 'danger' : ''">{{
-                            scope.row.state
-                        }}</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="creater"
-          label="创建人"
+          prop="idNum"
+          label="身份证号"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="date"
-          label="创建时间"
+          prop="safeCode"
+          label="社保编号"
           align="center"
         ></el-table-column>
+        <el-table-column
+          prop="busName"
+          label="企业名称"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="busCode"
+          label="企业社保编号"
+          align="center"
+        ></el-table-column>       
         <el-table-column
           label="操作"
           width="180"
@@ -151,10 +173,10 @@
               type="text"
               @click="handleSee(scope.$index, scope.row)"
             >查看</el-button>
-            <el-button
+            <!-- <el-button
               type="text"
               @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button>
+            >编辑</el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -342,7 +364,7 @@ export default {
         getData() {
             fetchData(this.query).then((res) => {
                 console.log(res);
-                this.tableData = res.userList;
+                this.tableData = res.talentsList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },
@@ -480,7 +502,9 @@ export default {
     height: 17px;
     border-radius: 3px;
 }
-
+/deep/.el-input--suffix .el-input__inner {
+    padding: 0 15px;
+}
 .fr {
     float: right;
 }

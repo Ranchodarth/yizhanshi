@@ -10,24 +10,15 @@
         label-width="80px"
       >
         <el-form-item
-          label="角色名称"
+          label="银行名称"
           class="mr10"
         >
           <el-input
-            v-model="form.name"
+            v-model="form.bankName"
             placeholder="请输入"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="登录名"
-          class="mr10"
-        >
-          <el-input
-            v-model="form.name"
-            placeholder="请输入"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="角色类型">
+        <el-form-item label="状态">
           <el-select
             v-model="formInline.region"
             placeholder="请选择"
@@ -74,13 +65,13 @@
           inactive-text=""
         >
         </el-switch>
-        <el-switch
+        <!-- <el-switch
           class="btn_hand mr30"
           v-model="switchCloseFlag"
           active-text="冻结"
           inactive-text=""
         >
-        </el-switch>
+        </el-switch> -->
       </div>
       <el-table
         :data="tableData"
@@ -102,23 +93,18 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="titleName"
-          label="角色名称"
+          prop="bankName"
+          label="银行名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="loginName"
-          label="登录名"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="realName"
-          label="姓名"
+          prop="contacts"
+          label="联系人"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="phoneNum"
-          label="联系电话"
+          label="联系方式"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -147,10 +133,10 @@
           align="center"
         >
           <template slot-scope="scope">
-            <el-button
+            <!-- <el-button
               type="text"
               @click="handleSee(scope.$index, scope.row)"
-            >查看</el-button>
+            >查看</el-button> -->
             <el-button
               type="text"
               @click="handleEdit(scope.$index, scope.row)"
@@ -342,7 +328,7 @@ export default {
         getData() {
             fetchData(this.query).then((res) => {
                 console.log(res);
-                this.tableData = res.userList;
+                this.tableData = res.banksList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },

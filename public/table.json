@@ -42,10 +42,10 @@
             "address": "太仓市剑南路89号",
             "street": "路堵街道",
             "type": "规模以上企业、高新技术企业",
-            "tel":"0512-23213242",
-            "liaise":"张三",
-            "phone":"13812348273",
-            "remarks":"备注"
+            "tel": "0512-23213242",
+            "liaise": "张三",
+            "phone": "13812348273",
+            "remarks": "备注"
         },
         {
             "id": 2,
@@ -55,10 +55,10 @@
             "address": "太仓市郑和路120号",
             "street": "城厢镇",
             "type": "规模以上企业",
-            "tel":"0512-23213242",
-            "liaise":"张三",
-            "phone":"13812348273",
-            "remarks":"备注"
+            "tel": "0512-23213242",
+            "liaise": "张三",
+            "phone": "13812348273",
+            "remarks": "备注"
         },
         {
             "id": 3,
@@ -68,10 +68,10 @@
             "address": "太仓市郑和路120号",
             "street": "双凤镇",
             "type": "规模以上企业",
-            "tel":"0512-23213242",
-            "liaise":"张三",
-            "phone":"13812348273",
-            "remarks":"备注"
+            "tel": "0512-23213242",
+            "liaise": "张三",
+            "phone": "13812348273",
+            "remarks": "备注"
         },
         {
             "id": 4,
@@ -81,13 +81,13 @@
             "address": "太仓市郑和路120号",
             "street": "太仓港区",
             "type": "规模以上企业",
-            "tel":"0512-23213242",
-            "liaise":"张三",
-            "phone":"13812348273",
-            "remarks":"备注"
+            "tel": "0512-23213242",
+            "liaise": "张三",
+            "phone": "13812348273",
+            "remarks": "备注"
         }
     ],
-    "userList":[
+    "userList": [
         {
             "id": 1,
             "titleName": "系统管理员",
@@ -96,7 +96,7 @@
             "phoneNum": "15093505387",
             "state": "启用",
             "creater": "系统初始化",
-            "date":"2020-01-01"
+            "date": "2020-01-01"
         },
         {
             "id": 1,
@@ -106,7 +106,7 @@
             "phoneNum": "15093505387",
             "state": "启用",
             "creater": "系统初始化",
-            "date":"2020-01-01"
+            "date": "2020-01-01"
         },
         {
             "id": 1,
@@ -116,7 +116,7 @@
             "phoneNum": "15093505387",
             "state": "启用",
             "creater": "系统初始化",
-            "date":"2020-01-01"
+            "date": "2020-01-01"
         },
         {
             "id": 1,
@@ -126,7 +126,211 @@
             "phoneNum": "15093505387",
             "state": "启用",
             "creater": "系统初始化",
-            "date":"2020-01-01"
+            "date": "2020-01-01"
+        }
+    ],
+    "declareList": [
+        {
+            "id": 1,
+            "name": "钱琳",
+            "type":"创新人才首年生活补贴",
+            "money":"30000.00", 
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001",
+            "applyState":"通过",
+            "grantState":"发放中",
+            "allCount":"2",
+            "grantCount":"1",
+            "interTime":"2020-04-02 08:01:50"
+        },
+        {
+            "id": 2,
+            "name": "钱琳",
+            "type":"创新人才首年生活补贴",
+            "money":"30000.00", 
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001",
+            "applyState":"通过",
+            "grantState":"发放中",
+            "allCount":"2",
+            "grantCount":"1",
+            "interTime":"2020-04-02 08:01:50"
+        },
+        {
+            "id": 3,
+            "name": "钱琳",
+            "type":"创新人才首年生活补贴",
+            "money":"30000.00", 
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001",
+            "applyState":"通过",
+            "grantState":"发放中",
+            "allCount":"2",
+            "grantCount":"1",
+            "interTime":"2020-04-02 08:01:50"
+        },
+        {
+            "id": 4,
+            "name": "钱琳",
+            "type":"创新人才首年生活补贴",
+            "money":"30000.00", 
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001",
+            "applyState":"通过",
+            "grantState":"发放中",
+            "allCount":"2",
+            "grantCount":"1",
+            "interTime":"2020-04-02 08:01:50"
+        }
+    ],
+    "talentsList": [
+        {
+            "id": 1,
+            "name": "钱琳",
+            "phoneNum": "13717954689",
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001"
+        },
+        {
+            "id": 2,
+            "name": "钱琳",
+            "phoneNum": "13717954689",
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001"
+        },
+        {
+            "id": 3,
+            "name": "钱琳",
+            "phoneNum": "13717954689",
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001"
+        },
+        {
+            "id": 4,
+            "name": "钱琳",
+            "phoneNum": "13717954689",
+            "idNum": "320522199010012258",
+            "safeCode": "320522199010012258",
+            "busName": "太仓市同维电子有限公司",
+            "busCode": "3205850001"
+        }
+    ],
+    "banksList": [
+        {
+            "id": 1,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "state": "启用",
+            "creater": "张三",
+            "date": "2020-01-01"
+        },
+        {
+            "id": 2,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "state": "启用",
+            "creater": "张三",
+            "date": "2020-01-01"
+        },
+        {
+            "id": 3,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "state": "启用",
+            "creater": "张三",
+            "date": "2020-01-01"
+        },
+        {
+            "id": 4,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "state": "启用",
+            "creater": "张三",
+            "date": "2020-01-01"
+        },
+        {
+            "id": 5,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "state": "启用",
+            "creater": "张三",
+            "date": "2020-01-01"
+        }
+    ],
+    "cardsList": [
+        {
+            "id": 1,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "cardNum": "4586457212012010742",
+            "state": "启用",
+            "creater": "张三",
+            "startDate": "2020-01-01",
+            "FinisfDate": "2020-01-01"
+        },
+        {
+            "id": 2,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "cardNum": "4586457212012010742",
+            "state": "启用",
+            "creater": "张三",
+            "startDate": "2020-01-01",
+            "FinisfDate": "2020-01-01"
+        },
+        {
+            "id": 3,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "cardNum": "4586457212012010742",
+            "state": "启用",
+            "creater": "张三",
+            "startDate": "2020-01-01",
+            "FinisfDate": "2020-01-01"
+        },
+        {
+            "id": 4,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "cardNum": "4586457212012010742",
+            "state": "启用",
+            "creater": "张三",
+            "startDate": "2020-01-01",
+            "FinisfDate": "2020-01-01"
+        },
+        {
+            "id": 5,
+            "bankName": "中国银行",
+            "contacts": "戚学",
+            "phoneNum": "13717954689",
+            "cardNum": "4586457212012010742",
+            "state": "启用",
+            "creater": "张三",
+            "startDate": "2020-01-01",
+            "FinisfDate": "2020-01-01"
         }
     ],
     "pageTotal": 4

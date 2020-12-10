@@ -51,7 +51,7 @@ export default {
             items: [
                 {
                     icon: "el-icon-lrolejiaoseguanli",
-                    index: 'table',
+                    index: 'role',
                     title: '角色管理'
                 },
                 {
@@ -66,33 +66,28 @@ export default {
                 },
                 {
                     icon: "el-icon-lrolerukou",
-                    index: 'charts',
+                    index: 'entry',
                     title: '统一入口'
                 },
                 {
                     icon: "el-icon-lrolechaxun",
-                    index: '4041',
+                    index: 'declare',
                     title: '申报查询及处理'
                 },
                 {
                     icon: "el-icon-lrolezhengjian",
-                    index: '4042',
+                    index: 'talents',
                     title: '人才库'
                 },
                 {
                     icon: "el-icon-lrolebank",
-                    index: '6',
+                    index: 'banks',
                     title: '银行管理'
                 },
                 {
                     icon: "el-icon-lrolecard",
-                    index: '4043',
+                    index: 'cards',
                     title: '银行卡汇总'
-                },
-                {
-                    icon: 'el-icon-lx-warn',
-                    index: '7',
-                    title: '错误处理'
                 }
             ]
         };

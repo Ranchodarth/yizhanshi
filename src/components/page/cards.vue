@@ -7,27 +7,42 @@
         ref="form"
         :inline="true"
         :model="form"
-        label-width="80px"
+        label-width="84px"
       >
         <el-form-item
-          label="角色名称"
+          label="申请人姓名"
           class="mr10"
         >
           <el-input
-            v-model="form.name"
+            v-model="form.bankName"
             placeholder="请输入"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="登录名"
+         <el-form-item
+          label="身份证号"
           class="mr10"
         >
           <el-input
-            v-model="form.name"
+            v-model="form.bankName"
             placeholder="请输入"
           ></el-input>
         </el-form-item>
-        <el-form-item label="角色类型">
+        <el-form-item label="银行名称">
+          <el-select
+            v-model="formInline.region"
+            placeholder="请选择"
+          >
+            <el-option
+              label="区域一"
+              value="shanghai"
+            ></el-option>
+            <el-option
+              label="区域二"
+              value="beijing"
+            ></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="状态">
           <el-select
             v-model="formInline.region"
             placeholder="请选择"
@@ -58,15 +73,6 @@
     </div>
     <div class="container">
       <div class="handle-box">
-        <el-button
-          type="primary"
-          class="handle-del mr30 btn_hand"
-          @click="delAllSelection"
-        ><img
-            src="../../assets/img/function_icon/add.png"
-            alt=""
-            style="vertical-align: middle;margin-right: 5px;"
-          ><span style="vertical-align: middle;">新增</span></el-button>
         <el-switch
           class="btn_hand mr30"
           v-model="switchFlag"
@@ -74,13 +80,23 @@
           inactive-text=""
         >
         </el-switch>
-        <el-switch
+        <el-button
+          type="primary"
+          class="handle-del mr30 btn_hand"
+          @click="delAllSelection"
+        ><img
+            src="../../assets/img/function_icon/daochu.png"
+            alt=""
+            style="vertical-align: middle;margin-right: 5px;"
+          ><span style="vertical-align: middle;">导出</span></el-button>
+        <el-button
+        <!-- <el-switch
           class="btn_hand mr30"
           v-model="switchCloseFlag"
           active-text="冻结"
           inactive-text=""
         >
-        </el-switch>
+        </el-switch> -->
       </div>
       <el-table
         :data="tableData"
@@ -102,23 +118,18 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="titleName"
-          label="角色名称"
+          prop="bankName"
+          label="银行名称"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="loginName"
-          label="登录名"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="realName"
-          label="姓名"
+          prop="contacts"
+          label="申请人姓名"
           align="center"
         ></el-table-column>
         <el-table-column
           prop="phoneNum"
-          label="联系电话"
+          label="联系方式"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -131,14 +142,19 @@
                         }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column
-          prop="creater"
-          label="创建人"
+         <el-table-column
+          prop="startDate"
+          label="申请时间"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="date"
-          label="创建时间"
+          prop="creater"
+          label="处理人"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="FinisfDate"
+          label="处理时间"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -151,10 +167,10 @@
               type="text"
               @click="handleSee(scope.$index, scope.row)"
             >查看</el-button>
-            <el-button
+            <!-- <el-button
               type="text"
               @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button>
+            >编辑</el-button> -->
           </template>
         </el-table-column>
       </el-table>
@@ -342,7 +358,7 @@ export default {
         getData() {
             fetchData(this.query).then((res) => {
                 console.log(res);
-                this.tableData = res.userList;
+                this.tableData = res.cardsList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },
