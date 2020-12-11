@@ -35,7 +35,7 @@
                         >删除</span
                     ></el-button
                 >
-                <el-button type="primary" class="handle-del btn_hand" @click="daochu"
+                <el-button type="primary" class="handle-del btn_hand" @click="exportExcel"
                     ><img src="../../assets/img/function_icon/daochu.png" alt="" style="vertical-align: middle; margin-right: 5px" /><span
                         style="vertical-align: middle"
                         >导出</span
@@ -50,6 +50,7 @@
                 header-cell-class-name="table-header"
                 @selection-change="handleSelectionChange"
                 :row-class-name="tableRowClassName"
+                id="outTable"
             >
                 <el-table-column type="selection" width="55" align="center"></el-table-column>
                 <el-table-column prop="id" label="序号" width="55" align="center"></el-table-column>
@@ -220,6 +221,8 @@
 
 <script>
 import { fetchData } from '../../api/index';
+import FileSaver from 'file-saver';
+import XLSX from 'xlsx';
 export default {
     name: 'basetable',
     data() {
@@ -266,7 +269,7 @@ export default {
         addRole() {
             this.addFlag = true;
         },
-         // 添加索引
+        // 添加索引
         tableRowClassName(row, index) {
             // 给每条数据添加一个索引
             row.row.index = row.rowIndex;
@@ -308,13 +311,29 @@ export default {
             this.form = row;
             this.editVisible = true;
         },
+        // 导出操作
+        exportExcel() {
+            var xlsxParam = { raw: true }; //转换成excel时，使用原始的格式
+            var wb = XLSX.utils.table_to_book(document.querySelector('#outTable'), xlsxParam); //outTable为列表id
+            var wbout = XLSX.write(wb, {
+                bookType: 'xlsx',
+                bookSST: true,
+                type: 'array'
+            });
+            try {
+                FileSaver.saveAs(new Blob([wbout], { type: 'application/octet-stream;charset=utf-8' }), 'sheetjs.xlsx');
+            } catch (e) {
+                if (typeof console !== 'undefined') console.log(e, wbout);
+            }
+            return wbout;
+        },
         // 保存编辑
         saveEdit() {
             this.editVisible = false;
             this.$message.success(`修改第 ${this.idx + 1} 行成功`);
             this.$set(this.tableData, this.idx, this.form);
         },
-        daochu(){},
+        daochu() {},
         // 分页导航
         handlePageChange(val) {
             this.$set(this.query, 'pageIndex', val);
