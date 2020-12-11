@@ -4,10 +4,11 @@
       <div class="inter_row">
         <p class="moudleTitle">快速入口</p>
         <div class="row_main">
-          <div
+          <router-link
             class="main_item mr10"
             v-for="(item,index) in interList"
             :key="index"
+            :to='item.url'
           >
             <img
               class="mr10"
@@ -15,7 +16,7 @@
               alt=""
             >
             <span>{{item.txt}}</span>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="inter_row">
@@ -62,19 +63,23 @@ export default {
             interList: [
                 {
                     img: require('../../assets/img/interSearch.png'),
-                    txt: '申报查询'
+                    txt: '申报查询',
+                    url: 'declare'
                 },
                 {
                     img: require('../../assets/img/interBank.png'),
-                    txt: '银行管理'
+                    txt: '银行管理',
+                    url: 'banks'
                 },
                 {
                     img: require('../../assets/img/interCard.png'),
-                    txt: '银行卡汇总'
+                    txt: '银行卡汇总',
+                    url: 'cards'
                 },
                 {
                     img: require('../../assets/img/interSubsidy.png'),
-                    txt: '补贴发放'
+                    txt: '补贴发放',
+                    url: 'declare'
                 }
             ],
             subsidyList: [
