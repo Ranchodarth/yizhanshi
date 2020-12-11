@@ -61,7 +61,7 @@ export default {
                 },
                 {
                     icon: "el-icon-lroleqiye",
-                    index: 'tabs',
+                    index: 'busi',
                     title: '企业单位信息维护'
                 },
                 {
