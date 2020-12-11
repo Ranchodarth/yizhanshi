@@ -191,7 +191,6 @@ export default {
         // 获取 easy-mock 的模拟数据
         getData() {
             fetchData(this.query).then((res) => {
-                console.log(res);
                 this.tableData = res.roleList;
                 this.pageTotal = res.pageTotal || 50;
             });
@@ -239,7 +238,6 @@ export default {
                         //如果选中数据和源数据的某一条唯一标识符相等，删除对应的源数据
                         if (val.index === v.index) {
                             this.tableData.splice(i, 1);
-                            console.log(val);
                             this.$message.error(`删除了${val.name}`);
                         }
                     });

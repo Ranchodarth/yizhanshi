@@ -12,7 +12,7 @@
             
         >
             <template v-for="item in items">
-                <template v-if="item.subs" @click.native="keyi">
+                <template v-if="item.subs">
                     <el-submenu :index="item.index" :key="item.index">
                         <template slot="title">
                             <!-- <img style="width: 16px; height: 16px; margin-right: 10px" :src="item.icon" alt="" /> -->
@@ -105,9 +105,6 @@ export default {
         });
     },
     methods:{
-        keyi(){
-            console.log("???")
-        }
     }
 };
 </script>
