@@ -6,14 +6,14 @@
         ref="form"
         :inline="true"
         :model="form"
-        label-width="80px"
+        label-width="84px"
       >
         <el-form-item
-          label="人员姓名"
+          label="申请人姓名"
           class="mr10"
         >
           <el-input
-            v-model="form.name"
+            v-model="form.bankName"
             placeholder="请输入"
           ></el-input>
         </el-form-item>
@@ -22,75 +22,11 @@
           class="mr10"
         >
           <el-input
-            v-model="form.name"
+            v-model="form.bankName"
             placeholder="请输入"
           ></el-input>
         </el-form-item>
-        <el-form-item
-          label="企业名称"
-          class="mr10"
-        >
-          <el-input
-            v-model="form.name"
-            placeholder="请输入"
-          ></el-input>
-        </el-form-item>
-        <el-form-item
-          label="企业社保账号"
-          class="mr10"
-        >
-          <el-input
-            v-model="form.name"
-            placeholder="请输入"
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <el-form
-        ref="form"
-        :inline="true"
-        :model="form"
-        label-width="80px"
-      >
-        <el-form-item
-          label="补贴类型"
-          class="mr10"
-        >
-          <el-select
-            v-model="formInline.region"
-            placeholder="请选择"
-          >
-            <el-option
-              label="区域一"
-              value="shanghai"
-            ></el-option>
-            <el-option
-              label="区域二"
-              value="beijing"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          label="申请状态"
-          class="mr10"
-        >
-          <el-select
-            v-model="formInline.region"
-            placeholder="请选择"
-          >
-            <el-option
-              label="区域一"
-              value="shanghai"
-            ></el-option>
-            <el-option
-              label="区域二"
-              value="beijing"
-            ></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item
-          label="发放状态"
-          class="mr10"
-        >
+        <el-form-item label="状态">
           <el-select
             v-model="formInline.region"
             placeholder="请选择"
@@ -124,39 +60,12 @@
         <el-button
           type="primary"
           class="handle-del mr30 btn_hand"
-          @click="delAllSelection"
-        ><img
-            src="../../assets/img/function_icon/daoru.png"
-            alt=""
-            style="vertical-align: middle; margin-right: 5px"
-          /><span style="vertical-align: middle">导入</span></el-button>
-        <el-button
-          type="primary"
-          class="handle-del mr30 btn_hand"
           @click="exportExcel"
         ><img
-            src="../../assets/img/function_icon/daochu.png"
+            src="../../assets/img/bank/daochu.png"
             alt=""
             style="vertical-align: middle; margin-right: 5px"
           /><span style="vertical-align: middle">导出</span></el-button>
-        <el-button
-          type="primary"
-          class="handle-del mr30 btn_hand"
-          @click="xiugaiAll"
-        ><img
-            src="../../assets/img/function_icon/xiugai.png"
-            alt=""
-            style="vertical-align: middle; margin-right: 5px"
-          /><span style="vertical-align: middle">修改总发放批次</span></el-button>
-        <el-button
-          type="primary"
-          class="handle-del mr30 btn_hand"
-          @click="fafangNow"
-        ><img
-            src="../../assets/img/function_icon/fafang.png"
-            alt=""
-            style="vertical-align: middle; margin-right: 5px"
-          /><span style="vertical-align: middle">发放</span></el-button>
       </div>
       <el-table
         :data="tableData"
@@ -179,8 +88,18 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
+          prop="bankName"
+          label="银行名称"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="contacts"
+          label="申请人姓名"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="phoneNum"
+          label="联系方式"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -189,53 +108,33 @@
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="busName"
-          label="企业名称"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="type"
-          label="补贴类型"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="money"
-          label="补贴金额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          label="申请状态"
+          label="办卡状态"
           align="center"
         >
           <template slot-scope="scope">
-            <el-tag :type="scope.row.applyState === '启用' ? 'success' : scope.row.applyState === '禁用' ? 'danger' : ''">{{
-                            scope.row.applyState
+            <el-tag :type="scope.row.state === '启用' ? 'success' : scope.row.state === '禁用' ? 'danger' : ''">{{
+                            scope.row.state
                         }}</el-tag>
           </template>
         </el-table-column>
         <el-table-column
-          prop="allCount"
-          label="总发放批次"
+          prop="creater"
+          label="创建人"
           align="center"
         ></el-table-column>
         <el-table-column
-          prop="grantCount"
-          label="当前已发放"
+          prop="startDate"
+          label="申请时间"
           align="center"
         ></el-table-column>
         <el-table-column
-          label="发放状态"
+          prop="creater"
+          label="处理人"
           align="center"
-        >
-          <template slot-scope="scope">
-            <el-tag :type="scope.row.grantState === '启用' ? 'success' : scope.row.grantState === '禁用' ? 'danger' : ''">{{
-                            scope.row.grantState
-                        }}</el-tag>
-          </template>
-        </el-table-column>
+        ></el-table-column>
         <el-table-column
-          prop="interTime"
-          label="导入时间"
+          prop="FinisfDate"
+          label="处理时间"
           align="center"
         ></el-table-column>
         <el-table-column
@@ -245,13 +144,32 @@
         >
           <template slot-scope="scope">
             <el-button
-              type="text"
+              type="primary"
+              class="handle-del mr30 btn_hand"
               @click="handleSee(scope.$index, scope.row)"
-            >查看</el-button>
-            <!-- <el-button
-              type="text"
-              @click="handleEdit(scope.$index, scope.row)"
-            >编辑</el-button> -->
+            ><img
+                src="../../assets/img/bank/fenpei.png"
+                alt=""
+                style="vertical-align: middle; margin-right: 5px"
+              /><span style="vertical-align: middle">分配</span></el-button>
+            <el-button
+              type="primary"
+              class="handle-del mr30 btn_hand"
+              @click="handleBanjie(scope.$index, scope.row)"
+            ><img
+                src="../../assets/img/bank/banjie.png"
+                alt=""
+                style="vertical-align: middle; margin-right: 5px"
+              /><span style="vertical-align: middle">办结</span></el-button>
+            <el-button
+              type="primary"
+              class="handle-del mr30 btn_hand"
+              @click="handleTuihui(scope.$index, scope.row)"
+            ><img
+                src="../../assets/img/bank/tuihui.png"
+                alt=""
+                style="vertical-align: middle; margin-right: 5px"
+              /><span style="vertical-align: middle">退回</span></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -267,60 +185,50 @@
       </div>
     </div>
 
-    <!-- 查看弹出框 -->
+    <!-- 分配 -->
     <el-dialog
-      title="查看"
+      title="分配"
       :visible.sync="seeanle"
       width="30%"
     >
+
       <el-form
         ref="form"
         :model="form"
-        label-width="130px"
+        label-width=""
       >
         <div class="mb20 seeItem">
-          <span>姓名</span>
-          <span>{{ form.name }}</span>
+          <span>申请人姓名</span>
+          <span>{{ form.contacts }}</span>
         </div>
         <div class="mb20 seeItem">
           <span>身份证号</span>
           <span>{{ form.idNum }}</span>
         </div>
         <div class="mb20 seeItem">
-          <span>企业名称</span>
-          <span>{{ form.busName }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>补贴类型</span>
-          <span>{{ form.type }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>补贴金额</span>
-          <span>{{ form.money }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>所属类型</span>
-          <span>{{ form.type }}</span>
+          <span>联系方式</span>
+          <span>{{ form.phoneNum }}</span>
         </div>
         <div class="mb20 seeItem">
           <span>申请状态</span>
-          <span>{{ form.applyState }}</span>
+          <span>{{ form.state }}</span>
         </div>
+
+        <el-form-item
+          label="客户经理"
+          class="mb20 flex"
+        >
+          <el-input v-model="form.street"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="手机号码"
+          class="mb20 flex"
+        >
+          <el-input v-model="form.tel"></el-input>
+        </el-form-item>
         <div class="mb20 seeItem">
-          <span>总发放批次</span>
-          <span>{{ form.allCount }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>当前已发放</span>
-          <span>{{ form.grantCount }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>发放状态</span>
-          <span>{{ form.grantState }}</span>
-        </div>
-        <div class="mb20 seeItem">
-          <span>导入时间</span>
-          <span>{{ form.interTime }}</span>
+          <span>分配日期</span>
+          <span>2020-04-01 12:12:12</span>
         </div>
       </el-form>
       <span
@@ -336,41 +244,53 @@
       </span>
     </el-dialog>
 
-    <!-- 修改总发放批次 -->
+    <!-- 办结 -->
     <el-dialog
-      title="修改总发放批次"
-      :visible.sync="allFlag"
+      title="办结"
+      :visible.sync="banjie"
       width="30%"
     >
+
       <el-form
         ref="form"
         :model="form"
-        label-width="130px"
+        label-width=""
       >
+        <div class="mb20 seeItem">
+          <span>申请人姓名</span>
+          <span>{{ form.contacts }}</span>
+        </div>
+        <div class="mb20 seeItem">
+          <span>身份证号</span>
+          <span>{{ form.idNum }}</span>
+        </div>
+        <div class="mb20 seeItem">
+          <span>联系方式</span>
+          <span>{{ form.phoneNum }}</span>
+        </div>
+        <div class="mb20 seeItem">
+          <span>申请状态</span>
+          <span>{{ form.state }}</span>
+        </div>
+
         <el-form-item
-          label="补贴类型"
-          class="mb20"
+          label="银行卡号"
+          class="mb20 flex"
         >
-          <el-select
-            v-model="form.type"
-            placeholder="请选择"
-          >
-            <el-option
-              label="启用"
-              value="启用"
-            ></el-option>
-            <el-option
-              label="禁用"
-              value="禁用"
-            ></el-option>
-          </el-select>
+          <el-input v-model="card"></el-input>
         </el-form-item>
-        <el-form-item
-          label="发放批次"
-          class="mb20"
-        >
-          <el-input v-model="form.allCount"></el-input>
-        </el-form-item>
+        <div class="mb20 seeItem">
+          <span>客户经理</span>
+          <span>王珊</span>
+        </div>
+        <div class="mb20 seeItem">
+          <span>手机号码</span>
+          <span>13124232323</span>
+        </div>
+        <div class="mb20 seeItem">
+          <span>办结日期</span>
+          <span>2020-04-01 12:12:12</span>
+        </div>
       </el-form>
       <span
         slot="footer"
@@ -378,90 +298,43 @@
       >
         <el-button
           type="primary"
-          @click="allFlag = false"
+          @click="banjie = false"
           class="mr30"
         >确 定</el-button>
-        <el-button @click="allFlag = false">取 消</el-button>
+        <el-button @click="banjie = false">取 消</el-button>
       </span>
     </el-dialog>
 
-    <!-- 发放 -->
+    <!-- 退回 -->
     <el-dialog
-      title="发放"
-      :visible.sync="doFlag"
-      width="70%"
+      title="退回"
+      :visible.sync="tuihuiFlag"
+      width="35%"
     >
-      <el-table
-        :data="tableData"
-        border
-        class="table"
-        ref="multipleTable"
-        header-cell-class-name="table-header"
-        @selection-change="handleSelectionChange"
-        id="outTable"
+      <el-form
+        ref="form"
+        :model="form"
+        label-width=""
+        class="flex"
       >
-        <el-table-column
-          type="selection"
-          width="55"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="id"
-          label="序号"
-          width="55"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="name"
-          label="姓名"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="idNum"
-          label="身份证号"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="type"
-          label="补贴类型"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="money"
-          label="补贴金额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="money"
-          label="已发放金额"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="bankName"
-          label="银行名称"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="cardNum"
-          label="人才卡卡号"
-          align="center"
-        ></el-table-column>
-        <el-table-column
-          prop="grantCount"
-          label="发放金额"
-          align="center"
-        ></el-table-column>
-      </el-table>
+        <span style="width:100px;">退回理由</span>
+        <el-input
+          type="textarea"
+          :rows="2"
+          placeholder="请输入内容"
+        >
+        </el-input>
+      </el-form>
       <span
         slot="footer"
         class="dialog-footer"
       >
         <el-button
           type="primary"
-          @click="doFlag = false"
+          @click="tuihuiFlag = false"
           class="mr30"
-        >发  放</el-button>
-        <el-button @click="doFlag = false">取 消</el-button>
+        >确 定</el-button>
+        <el-button @click="tuihuiFlag = false">取 消</el-button>
       </span>
     </el-dialog>
   </div>
@@ -486,8 +359,8 @@ export default {
             delList: [],
             editVisible: false,
             seeanle: false,
-            allFlag: false,
-            doFlag:false,
+            banjie: false,
+            tuihuiFlag: false,
             pageTotal: 0,
             form: {},
             idx: -1,
@@ -499,7 +372,8 @@ export default {
             switchFlag: true,
             switchCloseFlag: false,
             psw: '',
-            pswAgain: ''
+            pswAgain: '',
+            card: '622312141242141'
         };
     },
     created() {
@@ -509,7 +383,7 @@ export default {
         // 获取 easy-mock 的模拟数据
         getData() {
             fetchData(this.query).then((res) => {
-                this.tableData = res.declareList;
+                this.tableData = res.cardsList;
                 this.pageTotal = res.pageTotal || 50;
             });
         },
@@ -545,23 +419,23 @@ export default {
             this.multipleSelection = [];
         },
 
-        // 查看操作
+        // 分配操作
         handleSee(index, row) {
             this.idx = index;
             this.form = row;
             this.seeanle = true;
         },
-        // 编辑操作
-        handleEdit(index, row) {
+        // 办结操作
+        handleBanjie(index, row) {
             this.idx = index;
             this.form = row;
-            this.editVisible = true;
+            this.banjie = true;
         },
-        // 保存编辑
-        saveEdit() {
-            this.editVisible = false;
-            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
-            this.$set(this.tableData, this.idx, this.form);
+        // 退回操作
+        handleTuihui(index, row) {
+            this.idx = index;
+            this.form = row;
+            this.tuihuiFlag = true;
         },
         // 导出操作
         exportExcel() {
@@ -579,12 +453,11 @@ export default {
             }
             return wbout;
         },
-        // 修改总批次
-        xiugaiAll() {
-            this.allFlag = true;
-        },
-        fafangNow(){
-            this.doFlag = true;
+        // 保存编辑
+        saveEdit() {
+            this.editVisible = false;
+            this.$message.success(`修改第 ${this.idx + 1} 行成功`);
+            this.$set(this.tableData, this.idx, this.form);
         },
         // 分页导航
         handlePageChange(val) {
@@ -670,9 +543,7 @@ export default {
     height: 17px;
     border-radius: 3px;
 }
-/deep/.el-input--suffix .el-input__inner {
-    padding: 0 15px;
-}
+
 .fr {
     float: right;
 }
@@ -692,5 +563,8 @@ export default {
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+}
+.flex {
+    display: flex;
 }
 </style>

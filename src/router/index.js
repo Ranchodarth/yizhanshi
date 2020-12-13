@@ -68,9 +68,31 @@ export default new Router({
             ]
         },
         {
+            path: '/bank',
+            component: () => import(/* webpackChunkName: "entry" */ '../components/common/bankHome.vue'),
+            meta: { title: '公共' },
+            children: [
+                {
+                    path: '/bank/discount',
+                    component: () => import(/* webpackChunkName: "discount" */ '../components/page/discount.vue'),
+                    meta: { title: '优惠政策' }
+                },
+                {
+                    path: '/bank/makeCard',
+                    component: () => import(/* webpackChunkName: "makeCard" */ '../components/page/makeCard.vue'),
+                    meta: { title: '办卡处理' }
+                }
+            ]
+        },
+        {
             path: '/login',
             component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
             meta: { title: '登录' }
+        },
+        {
+            path: '/bankLogin',
+            component: () => import(/* webpackChunkName: "login" */ '../components/page/bankLogin.vue'),
+            meta: { title: '银行登录' }
         },
         {
             path: '*',

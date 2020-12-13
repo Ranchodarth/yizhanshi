@@ -143,7 +143,9 @@
             "grantState":"发放中",
             "allCount":"2",
             "grantCount":"1",
-            "interTime":"2020-04-02 08:01:50"
+            "interTime":"2020-04-02 08:01:50",
+            "bankName":"中国银行",
+            "cardNum":"62231241241414141"
         },
         {
             "id": 2,
@@ -158,7 +160,9 @@
             "grantState":"发放中",
             "allCount":"2",
             "grantCount":"1",
-            "interTime":"2020-04-02 08:01:50"
+            "interTime":"2020-04-02 08:01:50",
+            "bankName":"中国银行",
+            "cardNum":"62231241241414141"
         },
         {
             "id": 3,
@@ -173,7 +177,9 @@
             "grantState":"发放中",
             "allCount":"2",
             "grantCount":"1",
-            "interTime":"2020-04-02 08:01:50"
+            "interTime":"2020-04-02 08:01:50",
+            "bankName":"中国银行",
+            "cardNum":"62231241241414141"
         },
         {
             "id": 4,
@@ -188,7 +194,9 @@
             "grantState":"发放中",
             "allCount":"2",
             "grantCount":"1",
-            "interTime":"2020-04-02 08:01:50"
+            "interTime":"2020-04-02 08:01:50",
+            "bankName":"中国银行",
+            "cardNum":"62231241241414141"
         }
     ],
     "talentsList": [
@@ -281,6 +289,7 @@
             "id": 1,
             "bankName": "中国银行",
             "contacts": "戚学",
+            "idNum": "320522199010012258",
             "phoneNum": "13717954689",
             "cardNum": "4586457212012010742",
             "state": "启用",
@@ -292,6 +301,7 @@
             "id": 2,
             "bankName": "中国银行",
             "contacts": "戚学",
+            "idNum": "320522199010012258",
             "phoneNum": "13717954689",
             "cardNum": "4586457212012010742",
             "state": "启用",
@@ -303,6 +313,7 @@
             "id": 3,
             "bankName": "中国银行",
             "contacts": "戚学",
+            "idNum": "320522199010012258",
             "phoneNum": "13717954689",
             "cardNum": "4586457212012010742",
             "state": "启用",
@@ -314,6 +325,7 @@
             "id": 4,
             "bankName": "中国银行",
             "contacts": "戚学",
+            "idNum": "320522199010012258",
             "phoneNum": "13717954689",
             "cardNum": "4586457212012010742",
             "state": "启用",
@@ -325,6 +337,7 @@
             "id": 5,
             "bankName": "中国银行",
             "contacts": "戚学",
+            "idNum": "320522199010012258",
             "phoneNum": "13717954689",
             "cardNum": "4586457212012010742",
             "state": "启用",
